@@ -1,0 +1,17 @@
+{
+  "orderId": "ORD-2024-001",
+  "customerId": "CUST-5001",
+  "customerName": "Rajesh Kumar",
+  "orderDate": "2024-01-15",
+  "items": [
+    {
+      "productId": "PROD-LIC-101",
+      "productName": "TechNova ERP License",
+      "quantity": 5,
+      "unitPrice": 12000.00
+    }
+  ],
+  "totalAmount": 60000.00,
+  "currency": "INR",
+  "deliveryAddress": "Chennai, Tamil Nadu"
+}

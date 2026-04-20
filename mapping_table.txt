@@ -1,0 +1,29 @@
+MESSAGE MAPPING DOCUMENTATION
+==============================
+Artifact Name  : O2C_OrderMapping
+iFlow          : O2C_OrderProcessing_iFlow
+Company        : TechNova Solutions Pvt Ltd
+Project        : Order-to-Cash (O2C) Integration
+
+Source (JSON Field)            Target (XML Field)                       Mapping Type
+--------------------------------------------------------------------------------------
+orderId                    ->  SalesOrder/OrderID                       Direct
+customerId                 ->  SalesOrder/CustomerID                    Direct
+customerName               ->  SalesOrder/CustomerName                  Direct
+orderDate                  ->  SalesOrder/OrderDate                     Direct
+items[0]/productId         ->  SalesOrder/LineItem/ProductID            Direct
+items[0]/productName       ->  SalesOrder/LineItem/Description          Direct
+items[0]/quantity          ->  SalesOrder/LineItem/Quantity             Direct
+items[0]/unitPrice         ->  SalesOrder/LineItem/UnitPrice            Direct
+totalAmount                ->  SalesOrder/TotalAmount                   Direct
+currency                   ->  SalesOrder/Currency                      Direct
+(constant: "CREATED")      ->  SalesOrder/Status                       Constant
+
+Notes:
+- Direct   : Source field value is copied as-is to the target field
+- Constant : A fixed hardcoded value is set regardless of the source message
+- The Status field has no equivalent in the source JSON.
+  It is always set to CREATED for every new order received.
+- The Groovy step enforces Status even if the incoming XML has no Status node
+  or already contains a different value.
+- Nested JSON array items[] is flattened into a single LineItem XML block.

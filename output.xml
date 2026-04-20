@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SalesOrder>
+  <OrderID>ORD-2024-001</OrderID>
+  <CustomerID>CUST-5001</CustomerID>
+  <CustomerName>Rajesh Kumar</CustomerName>
+  <OrderDate>2024-01-15</OrderDate>
+  <LineItem>
+    <ProductID>PROD-LIC-101</ProductID>
+    <Description>TechNova ERP License</Description>
+    <Quantity>5</Quantity>
+    <UnitPrice>12000.00</UnitPrice>
+  </LineItem>
+  <TotalAmount>60000.00</TotalAmount>
+  <Currency>INR</Currency>
+  <Status>CREATED</Status>
+</SalesOrder>

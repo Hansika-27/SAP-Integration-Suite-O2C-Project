@@ -1,0 +1,25 @@
+import com.sap.gateway.ip.core.customdev.util.Message;
+import groovy.xml.XmlUtil
+
+def Message processData(Message message) {
+
+    def body = message.getBody(String);
+
+    def salesOrder = new XmlParser().parseText(body)
+
+    // Enforce the constant status regardless of the incoming XML shape.
+    def statusNodes = salesOrder.Status
+    if (statusNodes && statusNodes.size() > 0) {
+        statusNodes[0].value = "CREATED"
+    } else {
+        salesOrder.appendNode("Status", "CREATED")
+    }
+
+    // Add processing metadata headers for traceability
+    message.setHeader("OrderStatus", "RECEIVED");
+    message.setHeader("ProcessedBy", "TechNova_IS");
+    message.setHeader("IntegrationFlow", "O2C_OrderProcessing_iFlow");
+
+    message.setBody(XmlUtil.serialize(salesOrder));
+    return message;
+}

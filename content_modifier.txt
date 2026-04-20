@@ -1,0 +1,38 @@
+CONTENT MODIFIER CONFIGURATION
+================================
+Step Name  : Set_Processing_Headers
+iFlow      : O2C_OrderProcessing_iFlow
+Company    : TechNova Solutions Pvt Ltd
+Project    : Order-to-Cash (O2C) Integration
+
+Purpose:
+--------
+This Content Modifier step enriches the message with metadata headers
+before it is forwarded to the SAP S/4HANA backend. This follows SAP
+integration best practices for message traceability and auditability.
+
+Message Headers Configured:
+------------------------------------------------------------
+Header Name       | Type        | Value
+------------------------------------------------------------
+OrderStatus       | Constant    | RECEIVED
+ProcessedBy       | Constant    | TechNova_IS
+IntegrationFlow   | Constant    | O2C_iFlow_v1
+Timestamp         | Expression  | ${date:now:yyyy-MM-dd'T'HH:mm:ss}
+------------------------------------------------------------
+
+Header Explanations:
+- OrderStatus     : Marks the order status as RECEIVED when it first
+                    enters the SAP Integration Suite iFlow.
+- ProcessedBy     : Identifies the SAP IS tenant that processed this
+                    message (TechNova_IS).
+- IntegrationFlow : Records which integration flow version handled
+                    this specific message.
+- Timestamp       : Records the exact date and time of processing
+                    using a Camel simple expression language format.
+
+Why Content Modifier is Used:
+- Adds business context to the message for downstream systems
+- Enables full audit trail of message processing
+- Allows error logging to identify exactly when and where
+  a message was processed
